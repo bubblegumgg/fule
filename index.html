@@ -140,6 +140,51 @@
             text-align: center;
             font-size: 0.9rem;
         }
+
+        /* 新增：实现垂直滚动动画 */
+        @keyframes vertical-scroll {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                /* 关键：滚动距离是所有项目总高度的一半 (因为我们复制了一次内容) */
+                transform: translateY(-50%); 
+            }
+        }
+
+     #vertical-portfolio {
+            height: 550px; /* 恢复框架高度，保持紧凑感 */
+            overflow: hidden; 
+            background-color: #e9ecef;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 5rem; 
+            position: relative; 
+        }
+
+    .scroll-list {
+            animation: vertical-scroll 30s linear infinite; /* 调整为 30 秒，确保图片平滑滚动 */
+            display: flex;
+            flex-direction: column; 
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+    .scroll-item {
+            padding: 10px 0;
+            text-align: center;
+        }
+    .scroll-item a {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+    .scroll-item img {
+            max-height: 400px; /* 显著放大图片的高度，使其占据框架内更大面积 */
+            width: auto; /* 关键：保持图片原始比例，不拉伸 */
+            object-fit: contain; /* 关键：完整展示图片，不裁切 */
+            border-radius: 4px;
+        }
     </style>
 </head>
 <body>
@@ -166,8 +211,6 @@
             <h1 class="hero-title mb-3">The Intersection of Tech & Artistry</h1>
             <p class="lead text-secondary">
                 Focusing on Real-Time Rendering Pipelines, UE Blueprint Systems, and Immersive Environment Design
-            </p>
-            <a href="#portfolio" class="btn btn-primary btn-lg mt-3">View Core Projects</a>
         </div>
     </section>
 
@@ -200,11 +243,11 @@
                     </div>
                 </a>
 
-                <a href="#contact" class="preview-card">
-                    <div class="card-image-placeholder">Contact Info Graphic (Replace Me)</div>
+                <a href="tool.html" class="preview-card">
+                    <img src="python/2.jpg" alt="Custom Tools Maya Python" class="img-fluid" style="height: 60%; width: 100%; object-fit: cover;">
                     <div class="card-body">
-                        <h5 class="fw-bold">Forest</h5>
-                        <p class="text-muted">Shader</p>
+                        <h5 class="fw-bold">Custom Maya Python Tools</h5>
+                        <p class="text-muted">Code</p>
                     </div>
                 </a>
                 
@@ -216,13 +259,15 @@
         <h2 class="section-title h3">About Me</h2>
         <div class="row">
             <div class="col-md-8">
-                <p>I am Youxuan Wang, a Technical Artist who bridges aesthetic sensibility with engineering rigor. My studies at focused heavily on real-time graphics pipelines, Unreal Engine's Blueprint system architecture, and streamlined asset production workflows.</p>
-                <p>My core focus is the construction of high-performance, scalable game systems. I excel at translating artistic vision into optimized real-time solutions, with practical experience in shader development and modular environment building.</p>
+                <p>I am Youxuan Wang, a Technical Art–focused applicant with a background in digital media and real-time environment production. My work sits at the intersection of visual design and technical implementation, with a strong emphasis on Unreal Engine workflows and asset-based scene construction.</p>
+                <p>Through my studies and projects, I have focused on building complete real-time environments, from modeling and material creation to in-engine layout, lighting, and sequencing. I am particularly interested in how technical decisions—such as modular design, material workflows, and lighting setup—shape both performance and visual storytelling.</p>
                 <h4 class="mt-4">Technical Skill Overview</h4>
                 <ul class="list-unstyled">
-                    <li>**Real-Time Engines:** Unreal Engine (Blueprint Scripting, Sequencer), Unity (Basic C#)</li>
-                    <li>**Rendering/Material:** Node-based Shader Development, Substance Designer/Painter, PBR Workflow</li>
-                    <li>**Asset Creation:** Maya (Modeling/UV), ZBrush (Sculpting), Efficient Asset Structuring</li>
+                    <li><strong>Real-Time Engines:</strong> Unreal Engine (Blueprint basics, Sequencer, level assembly, lighting) Maya (basic Python)</li>
+                    <li><strong>Rendering & Materials：</strong> Node-based material creation (Unreal Engine, Substance Designer)</li>
+                    <li>Substance Painter for texture refinement and PBR workflows</li>
+                    <li><strong>Asset Creation</strong> Maya (hard-surface modeling, UV layout, Arnold rendering)</li>
+                    <li>Modular asset creation for real-time environments</li>
                 </ul>
             </div>
             <div class="col-md-3 text-center">
@@ -235,23 +280,6 @@
         </div>
     </section>
 
-    <section id="portfolio" class="container">
-        <h2 class="section-title h3">Core Portfolio</h2>
-        <p class="lead">Below are examples of my Level Design and Shader projects. Videos are embedded from external services to guarantee rapid loading times.</p>
-
-        <h4 class="mt-5 text-primary">Project I: Modular Urban Level Design (UE Blueprint)</h4>
-        <div class="video-wrapper">
-            <iframe src="YOUR_YOUTUBE_EMBED_LINK_HERE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <p><strong>Technical Focus:</strong> Implemented a dynamic asset generation system using UE Blueprints for rapid level iteration and lighting management. Demonstrated rigorous asset naming conventions and directory structure crucial for team production efficiency.</p>
-
-        <h4 class="mt-5 text-primary">Project II: High-Performance Custom Water Shader</h4>
-        <div class="video-wrapper">
-            <img src="placeholder-shader-loop.gif" alt="Shader Effect Animation" class="img-fluid">
-        </div>
-        <p><strong>Technical Focus:</strong> Developed a performant, node-based dynamic water shader, minimizing expensive pixel shader operations. Showcased logic for real-time ripple generation, depth-based blending, and reflection effects, all while maintaining a low render cost.</p>
-    </section>
-
     <section id="contact" class="container">
         <h2 class="section-title h3">Contact Information</h2>
         <div class="row">
@@ -259,9 +287,8 @@
                 <p>I welcome the opportunity to discuss my work further. Please contact me via the channels below:</p>
                 <ul class="list-unstyled">
                     <li>Email: <a href="mailto:pthia.flo@gmail.com">pthia.flo@gmail.com</a></li>
-                    <li>Ins: <a href="https://github.com/your-username" target="_blank">wangyouxuann</a></li>
+                    <li>Ins: <a href="https://www.instagram.com/wangyouxuann/" target="_blank">wangyouxuann</a></li>
                 </ul>
-                <a href="your-resume.pdf" class="btn btn-danger mt-3">Download Full Resume (PDF)</a>
             </div>
         </div>
     </section>
